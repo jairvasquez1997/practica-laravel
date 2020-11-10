@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-8">
             <div class="card">
-                <div class="card-header">Mis entradas</div>
+                <div class="card-header">{{ $entry->titulo }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,14 +14,14 @@
                         </div>
                     @endif
 
-                    
-                    <ul>
-                        @foreach($entries as $entry)
-                        <a href="{{ route('entradas', $entry->id) }}">
-                            <li>{{ $entry->titulo }}</li>
-                        </a>
-                        @endforeach
-                    </ul>
+                    {{ $entry->contenido }}
+
+                    @if($entry->user_id === auth()->id())
+                    <hr>
+                    <a href="{{ route('entradas-edit', $entry->id) }}" class="btn btn-primary">
+                        Editar entrada
+                    </a>
+                    @endif
                 </div>
             </div>
         </div>
